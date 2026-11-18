@@ -13,7 +13,6 @@ if command -v lsd &>/dev/null; then
     alias tree='lsd --icon=never --group-directories-first --tree'
 else
     alias ls="ls --color=auto --group-directories-first"
-    alias tree='tree -C'
 fi
 if command -v distrobox &>/dev/null; then
     alias de='distrobox enter'
