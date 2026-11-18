@@ -30,12 +30,4 @@ vim.g.loaded_netrwPlugin = 1
 
 -- set colorscheme
 vim.cmd.colorscheme("ultimate")
-
--- load everything from lua directory
-local config_dir = vim.fn.stdpath("config")
-local lua_files = vim.fn.glob(config_dir .. "/lua/**/*.lua", false, true)
-table.sort(lua_files)
-for _, lua_file in ipairs(lua_files) do
-    local module = lua_file:sub(#config_dir + 6, -5):gsub("/", ".")
-    require(module)
-end
+vim.opt.termguicolors = true
