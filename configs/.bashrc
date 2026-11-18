@@ -9,3 +9,7 @@ if [ -d ~/.config/bashrc.d ]; then
     done
 fi
 unset rc
+
+if [ -f ~/.bash_init ]; then
+    . ~/.bash_init
+fi
