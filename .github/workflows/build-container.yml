@@ -1,0 +1,42 @@
+name: Build and Push Container Image
+
+on:
+  push:
+    branches: [ "main" ] # Or your default branch name
+  schedule:
+    # Run every Sunday at 02:00 UTC
+    - cron: '0 2 * * 0'
+  workflow_dispatch: # Optional: allows manual triggering from the Actions tab
+
+env:
+  REGISTRY: ghcr.io
+  # Use your actual username here, e.g., octocat
+  # Using github.repository_owner ensures it uses the repo owner
+  IMAGE_NAME: ${{ github.repository_owner }}/netbird-client
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          # Tag as latest, and optionally add a SHA tag for version tracking
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
