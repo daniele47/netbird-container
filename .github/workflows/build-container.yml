@@ -2,7 +2,7 @@ name: Build and Push Container Image
 
 on:
   push:
-    branches: [ "main" ] # Or your default branch name
+    branches: [ "main" ]
   schedule:
     # Run every Sunday at 02:00 UTC
     - cron: '0 2 * * 0'
@@ -10,8 +10,6 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  # Use your actual username here, e.g., octocat
-  # Using github.repository_owner ensures it uses the repo owner
   IMAGE_NAME: ${{ github.repository_owner }}/netbird-client
 
 jobs:
@@ -37,6 +35,5 @@ jobs:
         with:
           context: .
           push: true
-          # Tag as latest, and optionally add a SHA tag for version tracking
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
