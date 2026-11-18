@@ -1,0 +1,31 @@
+" indentations = 4 spaces
+set tabstop=4
+set shiftwidth=4
+set expandtab
+
+" line number
+set number
+set relativenumber
+highlight LineNr ctermfg=240 guifg=#585858
+
+" state files
+set viminfofile=~/.config/vim/viminfo
+set noswapfile
+
+" customize cursor
+let &t_SI = "\<Esc>[6 q"
+let &t_EI = "\<Esc>[2 q"
+let &t_SR = "\<Esc>[4 q"
+
+" various
+syntax on
+colorscheme ultimate
+set mouse=a
+set scrolloff=5
+set ttimeout
+set ttimeoutlen=50 " makes Escape actually function (waits 50 ms instead of 1000ms)
+
+" hack in support for clipboard
+if !has('clipboard')
+  xnoremap <silent> "+y y:call system('wl-copy', @0)<CR>
+endif
