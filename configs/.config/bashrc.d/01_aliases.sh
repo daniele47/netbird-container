@@ -14,8 +14,3 @@ if command -v lsd &>/dev/null; then
 else
     alias ls="ls --color=auto --group-directories-first"
 fi
-if command -v distrobox &>/dev/null; then
-    alias de='distrobox enter'
-    alias dr='distrobox enter --'
-    alias dl='distrobox list'
-fi
